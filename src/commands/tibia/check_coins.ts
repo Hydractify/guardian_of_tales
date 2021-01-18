@@ -5,14 +5,14 @@ import { Account } from "../../entities/Account";
 import { ICustomCommandInhibitor } from "../../inhibitors/custom";
 import { Tibia } from "../../structures/Tibia";
 
-export default class CheckTokenCommand extends Command implements ICustomCommandInhibitor
+export default class CheckCoinsCommand extends Command implements ICustomCommandInhibitor
 {
 	public constructor()
 	{
-		super("tibia:check_tokens", {
+		super("tibia:check_coins", {
 			category: "tibia",
-			aliases: ["check-tokens", "check_tokens", "checktokens", "tokens"],
-			description: "Check the amount of tokens you currently have.",
+			aliases: ["check-coins", "check_coins", "checkcoins", "coins"],
+			description: "Check the amount of tibia coins you currently have.",
 		});
 	}
 
@@ -31,6 +31,6 @@ export default class CheckTokenCommand extends Command implements ICustomCommand
 	{
 		const account = await Tibia.fetchAccount(message.author.id) as Account;
 
-		return message.reply(`you currently have ${account.tokens} tokens.`);
+		return message.reply(`you currently have ${account.coins} tibi coins.`);
 	}
 }

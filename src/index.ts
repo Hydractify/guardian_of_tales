@@ -9,7 +9,6 @@ const client: Client = new Client({
 	ws: {
 		intents: [
 			"GUILDS",
-			"DIRECT_MESSAGES",
 			"GUILD_MESSAGES",
 		],
 	},

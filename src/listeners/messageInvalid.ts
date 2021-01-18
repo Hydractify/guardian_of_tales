@@ -20,7 +20,7 @@ export default class MessageInvalidListener extends Listener
 		if (message.createdTimestamp > message.author.lastCreditedMessageTimestamp + 1_000)
 		{
 			message.author.lastCreditedMessageTimestamp = message.createdTimestamp;
-			await Tibia.grantTokens(message.author.id, 1);
+			await Tibia.grantCoins(message.author.id, 1);
 		}
 	}
 }
