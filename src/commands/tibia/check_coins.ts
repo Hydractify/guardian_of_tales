@@ -31,6 +31,6 @@ export default class CheckCoinsCommand extends Command implements ICustomCommand
 	{
 		const account = await Tibia.fetchAccount(message.author.id) as Account;
 
-		return message.reply(`you currently have ${account.coins} tibi coins.`);
+		return message.reply(`you currently have ${account.coins} tibia coins.`);
 	}
 }
