@@ -454,6 +454,11 @@ discord-akairo@^8.1.0:
   resolved "https://registry.yarnpkg.com/discord-akairo/-/discord-akairo-8.1.0.tgz#9f3d910e12c197d40d3522a3a93679e2a746a6ca"
   integrity sha512-INWYmHo6NgyYx1ZKGSCmgznVfvkXpWGj4fGCGjO8IPkZ06Bidb9YKr4rXy2lwG0kprCjvqY0qbbhcw6N050abQ==
 
+discord-api-types@^0.12.1:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.12.1.tgz#98fd362ff71681bd4daa97e28a30ece87ae67f38"
+  integrity sha512-x8dhQqPZUtIEKjDHMdA6D3aAsZUMoeo58fAgFA5WOAdSh+uVyRsvny4+25b+RIRasG2Zf2UpDUsx8NKO5zk/6g==
+
 discord.js@^12.5.1:
   version "12.5.1"
   resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-12.5.1.tgz#992b45753e3815526a279914ccc281d3496f5990"
@@ -1381,10 +1386,10 @@ typeorm@^0.2.29:
     yargonaut "^1.1.2"
     yargs "^16.0.3"
 
-typescript@^4.1.2:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.1.2.tgz#6369ef22516fe5e10304aae5a5c4862db55380e9"
-  integrity sha512-thGloWsGH3SOxv1SoY7QojKi0tc+8FnOmiarEGMbd/lar7QOEd3hvlx3Fp5y6FlDUGl9L+pd4n2e+oToGMmhRQ==
+typescript@^4.2.0-dev.20210208:
+  version "4.2.0-dev.20210208"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.0-dev.20210208.tgz#81d44a872c48b2a25c774ceab60faef82ba90a47"
+  integrity sha512-zZD4z9MS8iy9dPxwBeEcQDemi13rfdAk7oCyAaiMQXsw1rcdmdsNGjpaQ8OZiY3I5Y/vaoDCu7yBB1ZaNSemLA==
 
 uri-js@^4.2.2:
   version "4.4.0"

@@ -1,4 +1,4 @@
-import { AkairoClient, CommandHandler, ListenerHandler, InhibitorHandler } from "discord-akairo";
+import { AkairoClient, CommandHandler, ListenerHandler } from "discord-akairo";
 import { ClientOptions } from "discord.js";
 import { join } from "path";
 
@@ -16,7 +16,7 @@ declare module "discord-akairo"
 export class Client extends AkairoClient
 {
 	public readonly commandHandler: CommandHandler;
-	public readonly inhibitorHandler: InhibitorHandler;
+	// public readonly inhibitorHandler: InhibitorHandler;
 	public readonly listenerHandler: ListenerHandler;
 
 	public constructor(options: ClientOptions)
@@ -40,9 +40,9 @@ export class Client extends AkairoClient
 			},
 		});
 
-		this.inhibitorHandler = new InhibitorHandler(this, {
-			directory: join(__dirname, "..", "inhibitors"),
-		});
+		// this.inhibitorHandler = new InhibitorHandler(this, {
+		// 	directory: join(__dirname, "..", "inhibitors"),
+		// });
 
 		this.listenerHandler = new ListenerHandler(this, {
 			directory: join(__dirname, "..", "listeners"),
@@ -50,15 +50,16 @@ export class Client extends AkairoClient
 
 		this.listenerHandler.setEmitters({
 			commandHandler: this.commandHandler,
-			inhibitorHandler: this.inhibitorHandler,
+			// inhibitorHandler: this.inhibitorHandler,
 			listenerHandler: this.listenerHandler,
+			ws: this.ws,
 		});
 
-		this.commandHandler.useInhibitorHandler(this.inhibitorHandler);
+		// this.commandHandler.useInhibitorHandler(this.inhibitorHandler);
 		this.commandHandler.useListenerHandler(this.listenerHandler);
 
 		this.listenerHandler.loadAll();
-		this.inhibitorHandler.loadAll();
+		// this.inhibitorHandler.loadAll();
 		this.commandHandler.loadAll();
 	}
 
