@@ -5,8 +5,8 @@
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
 		"forceConsistentCasingInFileNames": true,
-		"isolatedModules": true,
-		"lib": ["ESNext"],
+		"isolatedModules": false,
+		"lib": [],
 		"module": "CommonJS",
 		"moduleResolution": "Node",
 		"noFallthroughCasesInSwitch": true,
@@ -17,7 +17,7 @@
 		"rootDir": "src",
 		"strict": true,
 		"strictPropertyInitialization": false,
-		"target": "ESNext",
+		"target": "ES2019",
 		"sourceMap": true
 	},
 	"include": ["src"]
