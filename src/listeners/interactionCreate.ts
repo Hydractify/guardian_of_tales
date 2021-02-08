@@ -13,7 +13,6 @@ import
 
 import { Tibia } from "../structures/Tibia";
 
-
 export default class InteractionCreateListener extends Listener
 {
 	public constructor()
