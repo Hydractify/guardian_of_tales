@@ -11,7 +11,7 @@ const gamble: RESTPostAPIApplicationCommandsJSONBody = {
 	},
 	{
 		name: "multiplier",
-		description: "How much do you want to multiply your bet by?",
+		description: "How much do you want to multiply your bet by? Defaults to 2 when omitted.",
 		type: ApplicationCommandOptionType.INTEGER,
 	}],
 };
