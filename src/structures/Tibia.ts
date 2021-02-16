@@ -1,4 +1,4 @@
-import { getRepository } from "typeorm";
+import { getConnection, getRepository } from "typeorm";
 
 import { Account } from "../entities/Account";
 
@@ -24,6 +24,27 @@ export class Tibia
 		return result.affected !== 0;
 	}
 
+	public static async recordGamble(account: Account, spent: number, won?: number): Promise<void>
+	{
+		if (won)
+		{
+			// Deduct won amount, otherwise, when gambling to double the amount, they'll get triple.
+			const wonAmount = won - spent;
+
+			account.gambledWin += wonAmount;
+			account.coins += wonAmount;
+		}
+		else
+		{
+			account.gambledLoss += spent;
+			account.coins -= spent;
+		}
+
+		await getConnection().transaction(async entityManager =>
+		{
+			await entityManager.save(account);
+		});
+	}
 }
 
 

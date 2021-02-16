@@ -12,4 +12,10 @@ export class Account
 
 	@Column({ name: "coins", type: "int", width: 12 })
 	public coins: number;
+
+	@Column({ name: "gambled_win", type: "int", width: 12 })
+	public gambledWin: number;
+
+	@Column({ name: "gambled_loss", type: "int", width: 12 })
+	public gambledLoss: number;
 }

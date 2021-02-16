@@ -75,26 +75,52 @@ export default class InteractionCreateListener extends Listener
 		if (!account) return this.respondAccountSignup(id, token);
 
 		const coinsOption = options.find(option => option.name === "coins");
-		if (!coinsOption || typeof coinsOption.value !== "number" || coinsOption.value <= 0)
+		if (!coinsOption || typeof coinsOption.value !== "number" || coinsOption.value < 50)
 		{
-			return this.respondEphemeral(id, token, { content: "You need to gamble at least 1 coin." });
+			return this.respondEphemeral(id, token, { content: "You need to gamble at least 50 coins." });
+		}
+		const coins = coinsOption.value;
+
+		const multiplierOption = options.find(option => option.name === "multiplier");
+		let multiplier = 2;
+
+		if (multiplierOption)
+		{
+			if (typeof multiplierOption.value !== "number" || multiplierOption.value < 2)
+			{
+				return this.respondEphemeral(id, token, { content: "You need to have a minimum multiplier of 2." });
+			}
+
+			multiplier = multiplierOption.value;
 		}
 
-		let coins = coinsOption.value;
-
-		// Win -> double your stake, lose -> lose your stake
-		const multiplier = Math.random() < 0.05 ** 3 ? 1 : -1;
-		coins *= multiplier;
-		await Tibia.grantCoins(userId, coins);
-
-		if (multiplier < 0)
+		if (account.coins < coins)
 		{
-			return this.respondNormal(id, token, { content: `<@${userId}>, you lost your stake.` });
+			return this.respondEphemeral(id, token, { content: "You don't have enough coins to gamble that amount." });
 		}
-		else
+
+		// House has to make around 40% profit.
+		const profit = account.gambledWin ? account.gambledWin * 0.4 : 1;
+
+		// Apply percentage error to get how close the house is to 40% profit.
+		const margin = Math.abs(( account.gambledLoss - account.gambledWin ) - profit) / profit;
+
+		// Calculate the chances of the user winning.
+		const stakes = coins / ( multiplier * coins );
+
+		// Dampen the chances of winning based on the profit margin
+		const chance = margin >= 1 ? stakes : stakes - margin;
+
+		if (Math.random() <= chance)
 		{
-			return this.respondNormal(id, token, { content: `<@${userId}, you won and got double the coins back.` });
+			const coinsWon = coins * multiplier;
+			await Tibia.recordGamble(account, coins, coinsWon);
+
+			return this.respondNormal(id, token, { content: `<@${userId}>, you won and got ${coinsWon} coins back.` });
 		}
+
+		await Tibia.recordGamble(account, coins);
+		return this.respondNormal(id, token, { content: `<@${userId}>, you lost your bet.` });
 	}
 
 	private respondAccountSignup(id: Snowflake, token: string)
